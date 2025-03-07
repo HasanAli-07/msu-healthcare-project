@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Video Meeting</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- PeerJS library -->
+    <script src="https://unpkg.com/peerjs@1.5.1/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Secure Video Meeting</h1>
+        <div id="join-container">
+            <p>Current time: <span id="current-time"></span></p>
+            
+            <!-- Create Meeting Form -->
+            <div class="form-group" id="create-form">
+                <h2>Create New Meeting</h2>
+                <input type="text" id="username-create" placeholder="Enter your name" class="input-field">
+                <input type="password" id="meeting-password" placeholder="Set meeting password" class="input-field">
+                <button id="create-btn">Create Meeting</button>
+            </div>
+
+            <!-- Join Meeting Form -->
+            <div class="form-group" id="join-form">
+                <h2>Join Existing Meeting</h2>
+                <input type="text" id="username-join" placeholder="Enter your name" class="input-field">
+                <input type="text" id="room-id" placeholder="Enter meeting ID" class="input-field">
+                <input type="password" id="join-password" placeholder="Enter meeting password" class="input-field">
+                <button id="join-btn">Join Meeting</button>
+            </div>
+
+            <!-- Meeting Info Display -->
+            <div id="room-created" style="display: none;">
+                <h3>Meeting Created Successfully!</h3>
+                <div class="meeting-info">
+                    <div class="info-item">
+                        <label>Meeting ID:</label>
+                        <div class="room-id-display">
+                            <span id="displayed-room-id"></span>
+                            <button id="copy-room-btn" class="copy-btn">Copy</button>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <label>Password:</label>
+                        <div class="password-display">
+                            <span id="displayed-password"></span>
+                            <button id="copy-password-btn" class="copy-btn">Copy</button>
+                        </div>
+                    </div>
+                    <p class="info-text">Share these details with participants you want to invite</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" style="display: none;">
+            <p>Connecting to meeting...</p>
+        </div>
+
+        <!-- Meeting Container -->
+        <div id="meeting-container" style="display: none;">
+            <!-- Meeting Info Bar -->
+            <div class="meeting-info-bar">
+                <div class="meeting-details">
+                    <span class="info-label">Meeting ID:</span>
+                    <span id="active-meeting-id" class="info-value"></span>
+                    <button id="copy-active-id" class="copy-btn small">Copy ID</button>
+                </div>
+                <div class="meeting-status">
+                    <span id="connection-status" class="status-badge">Connected</span>
+                </div>
+            </div>
+
+            <div class="video-grid">
+                <div class="video-container">
+                    <video id="local-video" autoplay muted></video>
+                    <div class="no-video-placeholder">
+                        <span class="avatar">👤</span>
+                        <p>No video</p>
+                    </div>
+                    <div class="video-label">You</div>
+                </div>
+                <div id="remote-videos"></div>
+            </div>
+            
+            <!-- Meeting Controls -->
+            <div class="controls">
+                <button id="toggle-video">Toggle Video</button>
+                <button id="toggle-audio">Toggle Audio</button>
+                <button id="share-screen">Share Screen</button>
+                <button id="leave-btn" class="leave-btn">Leave Meeting</button>
+            </div>
+
+            <!-- Participants List -->
+            <div class="participants-panel">
+                <h3>Participants</h3>
+                <div id="participants-list"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
